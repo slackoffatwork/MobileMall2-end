@@ -32,4 +32,7 @@ public interface GoodsMapper {
     List<Goods> queryGoodsByPage(@Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize);
 //    使用mybatisPlus插件
     Page<Goods> queryByPage(Page<Goods> page);
+
+//    连表查询
+    Class query(Integer id);
 }

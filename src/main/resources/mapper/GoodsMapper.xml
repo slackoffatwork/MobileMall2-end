@@ -12,6 +12,17 @@
         <result property="createtime" column="createtime" jdbcType="DATE"/>
     </resultMap>
 
+<!--    连表查询 -->
+    <resultMap id="classInfo" type="com.coder.campus.pojo.Class">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <collection property="user" javaType="java.util.List" ofType="com.coder.campus.pojo.User">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="name"/>
+            <result column="user_password" property="password"/>
+        </collection>
+    </resultMap>
+
 
 
     <sql id="Base_Column_List">
@@ -82,6 +93,11 @@
         limit #{pageNum}, #{pageSize}
     </select>
     <select id="queryByPage" resultType="com.coder.campus.pojo.Goods"></select>
+
+    <select id="query" resultMap="classInfo">
+        select c.id,c.name,u.id as user_id,u.name as user_name,u.password as user_password
+        from tb_class c left join tb_user u on c.id = u.user_id
+    </select>
     <!--    <select id="queryAll" resultType="com.coder.campus.pojo.Goods">-->
 <!--        Select id,name,price,description,img,createtime FROM tb_goods-->
 <!--        where 1=1-->
