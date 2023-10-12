@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoginMapper extends BaseMapper<User> {
         User login(String name, String password);
+//连表查询
+        User queryUserInfo(Integer id);
 }

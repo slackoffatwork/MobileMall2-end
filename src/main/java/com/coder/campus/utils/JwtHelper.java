@@ -2,8 +2,6 @@ package com.coder.campus.utils;
 
 /**
  * ClassName: CreateVerifiCodeImage
- * Package: com.atguigu.campus.utils
- * Description:
  *
  * @author YZ
  * @Create: 2023/2/4 - 16:14  16:14
@@ -15,14 +13,16 @@ package com.coder.campus.utils;
  * @project: ssm_sms
  * @description: 绘制验证码图片
  */
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import io.jsonwebtoken.*;
 import org.springframework.util.StringUtils;
-
 import java.util.Date;
 
 public class JwtHelper {
     private static long tokenExpiration = 24*60*60*1000;
     private static String tokenSignKey = "123456";
+
 
     //生成token字符串
     public static String createToken(Long userId, Integer userType) {

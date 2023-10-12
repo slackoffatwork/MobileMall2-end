@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @TableName(value ="tb_user")
 @Data
 @AllArgsConstructor
@@ -13,6 +15,11 @@ public class User {
     private Integer userId;
     private String name;
     private String password;
+    private String verifiCode;
+    private Integer userType;
 
-    private Class aClass;
+    private List<Class> aClass;
+    private List<Role> roles;
+    private List<Menu> menus;
+    private Menu menuTree;
 }

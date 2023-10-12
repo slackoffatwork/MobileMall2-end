@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,13 +51,22 @@ public class GoodsController {
     }
 // 根据id进行查询
     @ApiOperation("根据id查询")
-    @GetMapping("/good")
-    public ResultDTO<Goods> good(Goods goods, HttpServletRequest request){
-        Goods goods1 = goodsService.queryById(goods);
-        //        将商品id存到session中
+    @GetMapping("/goods/{id}")
+    public ResultDTO<Goods> good(@PathVariable("id") Integer id, HttpServletRequest request){
+        Goods goods1 = goodsService.queryById(id);
+        //  将商品id存到session中
         HttpSession session = request.getSession();
-        session.setAttribute("good",goods1);
-        return ResultDTO.okOf(goods);
+        session.setAttribute("good",goods1.getGoodId());
+        return ResultDTO.okOf(goods1);
+    }
+//    足迹查询
+    @ApiOperation("足迹查询")
+    @GetMapping("/goods/footprint")
+    public ResultDTO<List<Goods>> footprint(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        int[] ids = (int[]) session.getAttribute("good");
+        List<Goods> footprint = goodsService.queryByIds(ids);
+        return ResultDTO.okOf(footprint);
     }
 // 删
     @ApiOperation("删除")

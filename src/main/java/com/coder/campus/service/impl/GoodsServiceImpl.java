@@ -34,8 +34,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Goods queryById(Goods goods) {
-        return goodsMapper.queryById(goods);
+    public Goods queryById(Integer id) {
+        return goodsMapper.queryById(id);
     }
 
     @Override
@@ -63,6 +63,7 @@ public class GoodsServiceImpl implements GoodsService {
     public Page<Goods> queryByPage(Page<Goods> page) {
         return goodsMapper.queryByPage(page);
     }
+
 
 
 }

@@ -5,18 +5,58 @@
 <mapper namespace="com.coder.campus.mapper.LoginMapper">
 
     <resultMap id="BaseResultMap" type="com.coder.campus.pojo.User">
-        <id property="userId" column="user_id" jdbcType="INTEGER"/>
-        <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <id column="user_id" property="userId"  jdbcType="INTEGER"/>
+        <result column="name" property="name"  jdbcType="VARCHAR"/>
+        <result column="password" property="password"  jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="roleResult" type="com.coder.campus.pojo.Role">
+        <result column="role_id" property="id"/>
+        <result column="role_name" property="name"/>
+    </resultMap>
+    <resultMap id="menusResult" type="com.coder.campus.pojo.Menu">
+        <result column="menu_id" property="id"/>
+        <result column="menu_name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="f_id" property="fId"/>
+    </resultMap>
+
+    <resultMap id="userResult" type="com.coder.campus.pojo.User">
+        <result column="id" property="userId"/>
+        <result column="name" property="name"/>
+        <collection property="roles" javaType="java.util.List" resultMap="roleResult"/>
+        <collection property="menus" javaType="java.util.List" resultMap="menusResult"/>
     </resultMap>
 
 
 
     <sql id="Base_Column_List">
-        userId, name, password
+        user_id, name, password
     </sql>
-    <select id="login" resultType="com.coder.campus.pojo.User">
-        SELECT userId, name,password FROM tb_user WHERE name = #{name} AND password = #{password}
+    <select id="login" resultType="com.coder.campus.pojo.User" resultMap="BaseResultMap">
+        SELECT user_id, name,password FROM tb_user WHERE name = #{name} AND password = #{password}
+    </select>
+    <!--生成菜单栏-->
+    <select id="queryUserInfo" resultMap="userResult" parameterType="int">
+        select u.id
+             , u.name
+             , u.age
+             , r.id as role_id
+             , r.name as role_name
+             , m.id as menu_id
+             , m.name as menu_name
+             , m.url
+             , m.f_id
+        from tb_user u
+                 left join tb_user_role_rel turr
+                           on u.id = turr.user_id
+                 left join tb_role r
+                           on turr.role_id = r.id
+                 left join tb_role_menu_rel trmr
+                           on r.id = trmr.role_id
+                 left join tb_menu m
+                           on trmr.menu_id = m.id
+        where u.id = #{id}
     </select>
 
 

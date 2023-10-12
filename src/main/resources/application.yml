@@ -6,7 +6,6 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/campus?characterEncoding=utf-8&userSSL=false&allowMultiQueries=true
-#    url: jdbc:mysql://120.27.128.112:3306/mobil_mall?characterEncoding=utf-8&userSSL=false&allowMultiQueries=true
     username: root
     password: 123456
 
@@ -30,8 +29,5 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-upload:
-  file:
-    location: D:/JavaProject/smart_campus/module_campus/src/main/resources/static/upload/
 server:
   port: 8082

@@ -16,7 +16,7 @@ public interface GoodsService {
 
     List<Goods> queryall();
 
-    Goods queryById(Goods goods);
+    Goods queryById(Integer id);
     List<Goods> queryByIds(int[] ids);
 
     List<Goods> addBatch(List<Goods> goodsList);
@@ -26,4 +26,5 @@ public interface GoodsService {
     int batchDeleteGoods(int[] ids);
 
     Page<Goods> queryByPage(Page<Goods> page);
+
 }

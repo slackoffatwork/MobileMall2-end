@@ -24,7 +24,6 @@ import java.util.List;
 public class FootController {
     @GetMapping("/all")
     public ResultDTO foot(){
-
         return null;
     }
 }
